@@ -20,7 +20,7 @@
 
 - 정상, 이상 거래를 분류하는 이진분류로 **이상 거래를 잘 탐지**하는 모델을 만드는 것이 목적
     
-    ![스크린샷 2022-06-15 오후 8.16.46.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/a78703e4-3170-4fc9-8dd3-123989d3c2aa/스크린샷_2022-06-15_오후_8.16.46.png)
+<img width="650" alt="스크린샷 2022-06-15 오후 8 16 46" src="https://user-images.githubusercontent.com/83392231/175846030-aca4edbd-c501-4a5b-8e2e-71ee416de94d.png">
     
 - 해당 데이터는 class 분포 차이가 많이나는 불균형 데이터
 - 사기탐지가 목표이므로 정밀도보다 **재현율**에 초점을 맞춰서 모델을 만들고자 한다.
@@ -34,13 +34,12 @@
 - shap로 중요도가 높은 컬럼을 찾아서 하위 열개 컬럼은 삭제
 - 중요도가 높게 나온 컬럼들의 타겟 분포도를 살펴보았더니 각 클래스의 분포 차이가 많이나서 영향력이 높은 피쳐라고 나온 것으로 보였다
     
-    ![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/b16bbbcc-a54d-44df-b305-1d95505ccbf9/Untitled.png)
-    
+<img width="287" alt="Untitled" src="https://user-images.githubusercontent.com/83392231/175846038-53127a6a-8e7f-4d6e-990d-2d7980be322f.png">
+
 - 중요도 높은 피쳐 위주로 outlier를 찾아서 삭제
     
-    ![outlier 예시 ](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/5674b674-2305-48bb-8bdc-1114320807c0/스크린샷_2022-06-15_오후_8.27.04.png)
+<img width="325" alt="스크린샷 2022-06-15 오후 8 27 04" src="https://user-images.githubusercontent.com/83392231/175846032-d7ee13b9-6eb7-4f9e-a778-e1542bab0e46.png">
     
-    outlier 예시 
     
 
 ### 2) 다운&업샘플링
@@ -63,7 +62,7 @@
 
 - 정확도는 98에 재현율도 91로 높지만 f1 score는 0.13, 정밀도가 0.07로 사기가 아닌 것도 대부분 사기라고 판별하는 상황
     
-    ![스크린샷 2022-06-15 오후 8.48.56.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/d89b9e64-61e0-447e-93c4-46142c1cf7f6/스크린샷_2022-06-15_오후_8.48.56.png)
+<img width="530" alt="스크린샷 2022-06-15 오후 8 48 56" src="https://user-images.githubusercontent.com/83392231/175846035-a6bef370-a25c-4acc-941c-ede4ebb3f32a.png">
     
 
 - 조화 평균인 f1 score를 기준으로 두고 임계값을 탐색 했을때 재현율과 정밀도에서 더 좋은 성능을 보여준 **로지스틱** 모델을 최종 선정
@@ -72,7 +71,7 @@
 
 - 로지스틱을 사용해 임계값 0.999 일때 재현율 83% f1-score 81% 인 모델을 만듦
     
-    ![스크린샷 2022-06-15 오후 8.52.36.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/afab393c-9269-49b1-b5b5-a22c87b506ea/스크린샷_2022-06-15_오후_8.52.36.png)
+<img width="534" alt="스크린샷 2022-06-15 오후 8 52 36" src="https://user-images.githubusercontent.com/83392231/175846036-906d834a-a074-452e-94b6-00dd1e633f79.png">
     
 - 훈련시에는 업샘플링으로 분포를 맞춰주기 때문에 정확도가 상당히 높게 나오지만 테스트 상황에서는 분포가 다르기 때문에 점수가 확연히 낮아진다
 - 재현율을 아예 100%로 만들 수 도 있었지만 그랬을때 정밀도와 정확도가 너무 많이 하락해서 쓸모없는 모델이 나왔다
